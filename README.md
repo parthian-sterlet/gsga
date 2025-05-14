@@ -32,7 +32,7 @@ Folder [**library**](https://github.com/parthian-sterlet/gsga/tree/main/library)
 * a set of weight matrices for non-target TFs;
 * a set of preliminarily computed lists of thresholds and respective ERRs for each weight matrix ([Tsukanov et al., 2022](https://doi.org/10.3389/fpls.2022.938545); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800); [Levitsky et al., 2024](https://doi.org/10.18699/vjgb-24-90)).
 
-## First step, GA1, Ante mare undae
+## First step, GA1
 To generate a new polymer, the default number of TOut = 10 monomers are required in a polymer. The total number of distinct input monomer units TIn should be higher, TOut >= TIn = 10, to support the polymer specificity. These TIn monomers are presumed to be the native DNA sequences supported by ChIP-seq/RNA-seq etc. experimental edidence of specific binding of the target TF. The task of the first step is dual: 
 1. to select exact output TOut monomers among the total TIn provided in input data; 
 2. to denote the exact order of these TOut selected monomers.
@@ -42,14 +42,14 @@ For example, if we have 20 input monomers {T1, T2, ... T20}, then the example ve
 * the number of TOut monomer units of a polymer; 
 * a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix.
 
-## Second step, GA2, Non est terminus ad perfectionem
+## Second step, GA2
 The second step (GA2) selects appropriate SNS outside the essential positions the target TF binding in each monomer. Hence, GA2 requires: 
 * a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores); 
 * a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix; 
 * a list of positions in the polymer (the assembled sequence from the first step) designating spacers between the essential cores and non-core elements, and flanking regions before/after the first/last monomer units of the polymer; 
 * the probability P of nucleotide substitutions (SNS) within non-core elements. 
 
-## Third step, GA3, Caedite eos. Novit enim Dominus qui sunt eius
+## Third step, GA3
 The third step (GA3) is another application of approach developped for the preceeding second step (GA2). Here the same source code is applied to destroy any DNA binding motif, hence it is not important here BSs of which TF to exclude. Hence, BSs of neither target nor non-target TFs are now undesirable. Hence, GA3 requires:
 * a polymer assembled from the units comprising the target TF binding site (the essential cores) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores), this polymer may be the result of either the first or second step;
 * a list of positions in the polymer designating the essential cores between the non-core regions and flanking regions before/after the first/last essential cores of the polymer;
