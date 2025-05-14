@@ -7,7 +7,7 @@ The GSGA program complex (PC) is designed to select synthetic polymers (tandem a
 * second step improves a polymer by introducing certain single-nucleotide substitutions (SNS) within non-core regions;
 * third step destroys a polymer given as a result of the first or second step by introducing certain SNS within the core regions.
 
-PC generates a population of solutions defined for each step. For the first/second steps these are a set of polymers and a set of SNS patterns, correpondingly. PC evaluates the solutions using a rank-based weighting scheme for motifs of potential TFBSs, and applies GAs to optimize the population of individuals, i.e. distinct polymers. PC can be used to design the structure of a polymer and its subsequent incorporation into a transgene promoter for specific expression under the action of a target TF. 
+PC generates a population of solutions defined for each step. For the first/second steps these are a set of polymers and a set of SNS patterns, correpondingly. PC evaluates the solutions using a rank-based weighting scheme for motifs of potential TFBSs, and applies GAs to optimize the population of individuals, i.e. distinct polymers. PC can be used to design the structure of a polymer as an oligonucleotide of length about 200-250 bp. This oligonucleotide is called genetic sensor or biosensor. Subsequent incorporation of this biosensor into a transgene promoter for specific expression under the action of a target TF can be used as a marker of its presence. 
 
 # Requirements
 The source code is written in C++ language. To compile exetubables from the source code you need:
