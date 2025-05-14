@@ -1,0 +1,1 @@
+./genosensor_seq_order_ga.exe ../examples/ ../matrices\ ein3_20mer_TEIL_like.seq 10 529 dapseq out.ga1 out.log1
