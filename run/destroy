@@ -1,0 +1,1 @@
+./genosensor_seq_ga.exe ../examples/destroy/ ../matrices/ gc_ebs_2nd.fa ebs_c_spacers 529 dapseq out_ga3 0 0.4 out_log3
