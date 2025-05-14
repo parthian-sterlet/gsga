@@ -65,7 +65,7 @@ separate compilation of all source files in VC++
 
 # Command line arguments
 
-## 1. Selection of a subset of total native units and definition of their order in a polymer
+## 1. Selection of a subset of total native units and definition of their order in a polymer, First block
 [Order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp) propgram defines the composition of units and their order. 
 1. path to files of (a) the target TF DNA motif and (b) its threshold list, this file contains the list of pairs {Threshold, -10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
 2. path to files of (a) all non-target TFs DNA motifs and (b) their threshold lists, these files contain the lists of pairs {Threshold, -10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
@@ -76,8 +76,8 @@ separate compilation of all source files in VC++
 7. output file listing results, i.e. the multiple solutions in the FASTA format in the descending order of the qulity.
 8. output log file showing the progress in calculation.
 
-## 2. Improvement of a polymer of native units by single nucleotide mutations within non-core regions of polymer
-[Improvement](https://github.com/parthian-sterlet/antinoise/blob/master/src/mix0.cpp) program introduce mutation of nucleotides in non-core regions of a polymer.
+## 2. Improve a polymer of native units by single nucleotide mutations within the non-core regions of polymer AND Destroy a polymer of synthetic units by single nucleotide mutations withiin the core regions, Second and Third blocks
+[Improve](https://github.com/parthian-sterlet/antinoise/blob/master/src/mix0.cpp) program introduce mutation of nucleotides in non-core regions of a polymer.
 1. path to files of (a) the target TF DNA motif and (b) its threshold list, this file contains the list of pairs {Threshold, -Log10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
 2. path to files of (a) all non-target TFs DNA motifs and (b) their threshold lists, these files contain the lists of pairs {Threshold, -Log10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
 3. input file in FASTA format with a DNA sequence of polymer selected by the previous analysis step, the first block, [Order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp)
@@ -93,5 +93,5 @@ separate compilation of all source files in VC++
 
 These scripts implement various blocks for Linux OS:
 1. [Order](https://github.com/parthian-sterlet/gsga/blob/master/src/order) - First block defines the composition and monomer order of native units
-2. [Improvement](https://github.com/parthian-sterlet/gsga/blob/master/src/imrovemnet) - Second block improves a polymer of native units to a polymer of synthetic units by single nucleotide mutations within the non-core regions
-3. [Degradation](https://github.com/parthian-sterlet/gsga/blob/master/src/degradation) - Third block destroys a polymer of synthetic units by single nucleotide mutations withiin the core regions
+2. [Improve](https://github.com/parthian-sterlet/gsga/blob/master/src/imrovemnet) - Second block improves a polymer of native units to a polymer of synthetic units by single nucleotide mutations within the non-core regions
+3. [Destroy](https://github.com/parthian-sterlet/gsga/blob/master/src/degradation) - Third block destroys a polymer of synthetic units by single nucleotide mutations withiin the core regions
