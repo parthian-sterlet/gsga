@@ -22,16 +22,30 @@ Folder [**library**](https://github.com/parthian-sterlet/gsga/tree/main/library)
 # Pipeline description
 
 # Common input data for all blocks
-(1) a set of weight matrices for off-target TFs; (2) a set of preliminarily computed lists of thresholds and respective ERRs for each matrix ([Tsukanov et al. 2022](https://doi.org/10.3389/fpls.2022.938545); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800); [Levitsky et al., 2024](https://doi.org/10.18699/vjgb-24-90)).
+* a set of weight matrices for off-target TFs;
+* a set of preliminarily computed lists of thresholds and respective ERRs for each matrix ([Tsukanov et al. 2022](https://doi.org/10.3389/fpls.2022.938545); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800); [Levitsky et al., 2024](https://doi.org/10.18699/vjgb-24-90)).
 
 ## First block, GA1, Ante mare undae
-To generate a new polymer, the default number of TOut = 10 monomers are stacked in a polymer. Note the defthat number of distinct input monomers TIn should be higher, TOut >= TIn = 10, to support the polymer specificity. Note that these TIn monomers are presumed to be the native DNA sequences supporte by ChIP-seq/RNA-seq etc. experimental edidence of specific binding of the target TF. The task of the first block is dual: (1) to select exact output Tout monomers among the total TIn provided in input data; (2) to denote the exact order of TOut selected monomers. For example, let we have 20 input monomers {T1, T2, ... T20}, then the version of the ouput order is {T17, T2, T5, T13, T4, T1, T18, T9, T15, T11}. To find an optimal combination, a genetic algorithm of the first block (GA1) selects the multiple versions of polymers with the least susceptibility to off-target TFs binding. As input data, GA1 uses (1) a set of TIn sequences (monomers) containing individual binding sites of the target TF, (2) the number of TOut monomer units of a polymer, (3) a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix.
+To generate a new polymer, the default number of TOut = 10 monomers are stacked in a polymer. Note the defthat number of distinct input monomers TIn should be higher, TOut >= TIn = 10, to support the polymer specificity. Note that these TIn monomers are presumed to be the native DNA sequences supporte by ChIP-seq/RNA-seq etc. experimental edidence of specific binding of the target TF. The task of the first block is dual: 
+* to select exact output Tout monomers among the total TIn provided in input data; 
+* to denote the exact order of TOut selected monomers. 
+For example, let we have 20 input monomers {T1, T2, ... T20}, then the version of the ouput order is {T17, T2, T5, T13, T4, T1, T18, T9, T15, T11}. To find an optimal combination, a genetic algorithm of the first block (GA1) selects the multiple versions of polymers with the least susceptibility to the non-target TFs binding. As input data, GA1 uses 
+* a set of TIn sequences (monomers) containing individual binding sites of the target TF; 
+* the number of TOut monomer units of a polymer; 
+* a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix.
 
 ## Second block, GA2, Non est terminus ad perfectionem
-The second block the second genetic algorithm (GA2) selects appropriate SNS outside the essential positions the target TF binding in each monomer. Hence, GA2 requires (1) a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores); (2) a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix; (3) a list of positions in the polymer (the assembled sequence from the first block) designating spacers between the essential cores and non-core elements, and flanking regions before/after the first/last monomer units of the polymer; (4) the probability P of nucleotide substitutions (SNS) within non-core elements. 
+The second block the second genetic algorithm (GA2) selects appropriate SNS outside the essential positions the target TF binding in each monomer. Hence, GA2 requires: 
+* a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores); 
+* a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix; 
+* a list of positions in the polymer (the assembled sequence from the first block) designating spacers between the essential cores and non-core elements, and flanking regions before/after the first/last monomer units of the polymer; 
+* the probability P of nucleotide substitutions (SNS) within non-core elements. 
 
 ## Third block, GA3, Caedite eos. Novit enim Dominus qui sunt eius
-The third block is another application of approach developped for the preceedin second block. Here the same source code is applied to destroy any DNA binding motif, hence it is not important here BSs of which TF to exclude. Hence, BSs of neither target nor non-target TFs are now undesirable. Hence, GA3 requires (1) a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores), this polymer may be the result of either the first or second block; (2) a list of positions in the polymer designating the essential cores between the non-core regions and flanking regions before/after the first/last essential cores of the polymer; (3) the probability P of nucleotide substitutions (SNS) within core elements.
+The third block is another application of approach developped for the preceedin second block. Here the same source code is applied to destroy any DNA binding motif, hence it is not important here BSs of which TF to exclude. Hence, BSs of neither target nor non-target TFs are now undesirable. Hence, GA3 requires:
+* a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores), this polymer may be the result of either the first or second block;
+* a list of positions in the polymer designating the essential cores between the non-core regions and flanking regions before/after the first/last essential cores of the polymer;
+* the probability P of nucleotide substitutions (SNS) within core elements.
 
 # How to compile
 * In Linux system: 
