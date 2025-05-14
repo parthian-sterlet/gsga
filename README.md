@@ -94,7 +94,7 @@ separate compilation of all source files in VC++
 5. integer value, count of motifs in library, default number is 529, it implies 528 DNA motifs of *A.thaliana* TFs from [Plant Cistrome](http://neomorph.salk.edu/dap_web/pages/index.php) database, from DAP-seq experoment ([O’Malley et al., 2016](https://doi.org/10.1016/j.cell.2016.08.063))
 6. char name of motif file, the default value "dapseq" means (a) for the non-target TFs: the weight matrix files are dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files are dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the weight matrix file is dapseq0.pwm and the threshold list file is dapseq0.dist.
 7. output file, log file listing results, i.e. the multiple solutions in the descending order of the qulity.
-8. integer value, the anchor mode. The values 1 or 0 mean the Imrove/Destroy option respecting the Second/Third steps of analysis. In these cases a specific weight matrix of a target TF is used / not used for optimization.
+8. integer value, the anchor mode. The values 1 or 0 mean the Improve/Destroy option respecting the Second/Third steps of analysis. In these cases a specific weight matrix of a target TF is opposed / is not opposed to matrices of all non-target TFs.
 9. double value, the probability P of nucleotide substitutions (SNS) within designated elements, P value is equal to the ratio between the number of mutation and sequence length, the number of substitutions is the same for each non-core/core spacer between two neighbor core/non-core regions for Improve/Desrtoy options.
 10. output log file showing the progress in calculation.
 
