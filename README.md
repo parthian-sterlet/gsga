@@ -27,9 +27,10 @@ Folder [**library**](https://github.com/parthian-sterlet/gsga/tree/main/library)
 
 ## First block, GA1, Ante mare undae
 To generate a new polymer, the default number of TOut = 10 monomers are stacked in a polymer. Note the defthat number of distinct input monomers TIn should be higher, TOut >= TIn = 10, to support the polymer specificity. Note that these TIn monomers are presumed to be the native DNA sequences supporte by ChIP-seq/RNA-seq etc. experimental edidence of specific binding of the target TF. The task of the first block is dual: 
-* to select exact output Tout monomers among the total TIn provided in input data; 
-* to denote the exact order of TOut selected monomers. 
-For example, let we have 20 input monomers {T1, T2, ... T20}, then the version of the ouput order is {T17, T2, T5, T13, T4, T1, T18, T9, T15, T11}. To find an optimal combination, a genetic algorithm of the first block (GA1) selects the multiple versions of polymers with the least susceptibility to the non-target TFs binding. As input data, GA1 uses 
+1. to select exact output Tout monomers among the total TIn provided in input data; 
+2. to denote the exact order of TOut selected monomers.
+
+For example, let we have 20 input monomers {T1, T2, ... T20}, then the version of the ouput order is {T17, T2, T5, T13, T4, T1, T18, T9, T15, T11}. To find an optimal combination, a genetic algorithm of the first block (GA1) selects the multiple versions of polymers with the least susceptibility to the non-target TFs binding. As input data, GA1 requires:
 * a set of TIn sequences (monomers) containing individual binding sites of the target TF; 
 * the number of TOut monomer units of a polymer; 
 * a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix.
