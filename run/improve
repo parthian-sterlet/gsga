@@ -1,1 +1,1 @@
-./genosensor_seq_ga.exe ../examples/improve/ ../matrices/ ebs_ord.fa ebs_spacers 529 dapseq out.ga2 1 0.2 out.log2
+./genosensor_seq_ga.exe ../examples/improve/ ../matrices/ ebs_ord.fa ebs_spacers 529 dapseq out_ga2 1 0.2 out_log2
