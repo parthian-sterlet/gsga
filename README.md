@@ -19,9 +19,6 @@ Folder [**examples**](https://github.com/parthian-sterlet/gsga/tree/main/example
 
 Folder [**library**](https://github.com/parthian-sterlet/gsga/tree/main/library) represents the library of DNA motifs, it contains two types of files: (1) files of PWM motifs as matrices of log-odds weights computed as desribed previously ([Levitsky et al., 2007](https://doi.org/10.1186/1471-2105-8-481); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800)) and (2) files of lists of recognition thresholds computed with the whole-genome set of promoters of protein coding genes, see Levitsky et al. ([2019](https://doi.org/10.1093/nar/gkz800)) and Tsukanov et al. ([2022](https://doi.org/10.3389/fpls.2022.938545)); to make the recognition for all DNA motifs uniform, each threshold respects the expected recognition rate (ERR) value, it means the probability recognition per one bp position in the promoters ([Levitsky et al., 2024](https://doi.org/10.18699/vjgb-24-90)); hence, each file of the list contains two columns: (a) recognition threshold and (b) ERR value as LOG10(probability), where the probability is ratio of the positions with recognized BSs (in either DNA strand) to the total number of tested positions in promoters.
 
-# Input data description
-). As input data, GA1 uses (1) a set of N sequences (monomers) containing the target TF binding site, and (2) a set of matrices for off-target TFs with (3) a preliminarily computed list of thresholds and respective FPRs for each matrix as described in (Levitsky et al., 2019). 
-
 # Pipeline description
 
 # Common input data for all blocks
@@ -31,11 +28,30 @@ Folder [**library**](https://github.com/parthian-sterlet/gsga/tree/main/library)
 To generate a new polymer, the default number of TOut = 10 monomers are stacked in a polymer. Note the defthat number of distinct input monomers TIn should be higher, TOut >= TIn = 10, to support the polymer specificity. Note that these TIn monomers are presumed to be the native DNA sequences supporte by ChIP-seq/RNA-seq etc. experimental edidence of specific binding of the target TF. The task of the first block is dual: (1) to select exact output Tout monomers among the total TIn provided in input data; (2) to denote the exact order of TOut selected monomers. For example, let we have 20 input monomers {T1, T2, ... T20}, then the version of the ouput order is {T17, T2, T5, T13, T4, T1, T18, T9, T15, T11}. To find an optimal combination, a genetic algorithm of the first block (GA1) selects the multiple versions of polymers with the least susceptibility to off-target TFs binding. 
 
 ## Second block
-The second block the second genetic algorithm (GA2) selects appropriate SNS outside the essential positions the target TF binding in each monomer. Hence, GA2 requires (1) a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides (less essential flanks) on 5' and 3' sides; (2) a matrix for the target TF; (3) a list of thresholds and respective ERRs for this matrix; (4) a list of positions in the assembled sequence designating spacers between the essential cores  and non-core elements flanking the assembled sequence; (5) the probability p of nucleotide substitutions  (SNS) within designated elements. 
+The second block the second genetic algorithm (GA2) selects appropriate SNS outside the essential positions the target TF binding in each monomer. Hence, GA2 requires (1) a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores); (2) a matrix for the target TF; (3) a list of thresholds and respective ERRs for this matrix; (4) a list of positions in the polymer (the assembled sequence from the first block) designating spacers between the essential cores and non-core elements, and flanking sequence before/after the first/last monomer units of the polymer; (5) the probability P of nucleotide substitutions  (SNS) within designated elements. 
 
 # Command line arguments
 
-## 1. Genomic background sequence generation approach
-The [major](https://github.com/parthian-sterlet/antinoise/blob/main/src/background_genome_mono.cpp) propgram of this tool finds the genomic background sequences for a particular genome (hg38, mm10, tair10, etc.). The background sequences match almost perfectly A/T content. The background sequences either match exactly the length of DNA sequences from the foreground set, or user defines the same length for all background sequences using a special parameters.
-## 2. Synthetic background sequence generation approach
-The alternative program [mix0.cpp](https://github.com/parthian-sterlet/antinoise/blob/master/src/mix0.cpp) generates synthetic background sequences that exactly match the nucleotide content of the foreground sequences.
+## 1. Selection of a subset of total native units and definition of their order in a polymer
+[Unit order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp) propgram defines the composition of units and their order. 
+1. path to files of (a) the target TF DNA motif and (b) its threshold list, this file contains the list of pairs {Threshold, -Log10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
+2. path to files of (a) all non-target TFs DNA motifs and (b) their threshold lists, these files contain the lists of pairs {Threshold, -Log10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
+3. input file in FASTA format of total amount of monomer units that can be used to generate momomer
+4. integer value, count of selected monomer units in a polymer, default number is 10
+5. integer value, count of motifs in library, default number is 528, it implies DNA motifs of *A.thaliana* TFs from [Plant Cistrome](http://neomorph.salk.edu/dap_web/pages/index.php) database, from DAP-seq experoment ([O’Malley et al., 2016](https://doi.org/10.1016/j.cell.2016.08.063)
+6. char name of motif file, the default value "dapseq" means (a) for non-target TFs: the motif files dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the motif file dapseq0.pwm and the threshold list file dapseq0.dist
+7. output file listing results, i.e. the multiple solutions in the FASTA format in the descending order of the qulity
+8. output log file showing the progress in calculation
+
+## 2. Improvement of a polymer of native units by single nucleotide mutations within non-core regions of polymer
+[Improvement](https://github.com/parthian-sterlet/antinoise/blob/master/src/mix0.cpp) program introduce mutation of nucleotides in non-core regions of a polymer.
+1. path to files of (a) the target TF DNA motif and (b) its threshold list, this file contains the list of pairs {Threshold, -Log10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
+2. path to files of (a) all non-target TFs DNA motifs and (b) their threshold lists, these files contain the lists of pairs {Threshold, -Log10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
+3. input file in FASTA format with a DNA sequence of polymer selected by the previous analysis step, the first block, [Unit order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp)
+4. file of tab-delimited table, this table marks positions in the polymer non-cores regions (spacers between the essential cores) and flanking sequences before/after the first/last monomers of the polymer
+5. integer value, count of motifs in library, default number is 528, it implies DNA motifs of *A.thaliana* TFs from [Plant Cistrome](http://neomorph.salk.edu/dap_web/pages/index.php) database, from DAP-seq experoment ([O’Malley et al., 2016](https://doi.org/10.1016/j.cell.2016.08.063)
+6. char name of motif file, the default value "dapseq" means (a) for non-target TFs: the motif files dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the motif file dapseq0.pwm and the threshold list file dapseq0.dist
+7. output file, log file listing results, i.e. the solution in the descending order of the qulity
+8. integer value, the anchor mode. The values 1 or 0 mean that a specific matrix of a target TF is used / not used for optimization.
+9. double value, the probability P of nucleotide substitutions (SNS) within designated elements, P value is equal to the ratio between the number of mutation and sequence length, the number of substitutions is the same for each non-core spacer between two neighbor core regions.
+10. output log file showing the progress in calculation
