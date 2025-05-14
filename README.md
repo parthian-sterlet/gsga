@@ -51,7 +51,7 @@ separate compilation of all source files in VC++
 # Command line arguments
 
 ## 1. Selection of a subset of total native units and definition of their order in a polymer
-[Unit order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp) propgram defines the composition of units and their order. 
+[Order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp) propgram defines the composition of units and their order. 
 1. path to files of (a) the target TF DNA motif and (b) its threshold list, this file contains the list of pairs {Threshold, -10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
 2. path to files of (a) all non-target TFs DNA motifs and (b) their threshold lists, these files contain the lists of pairs {Threshold, -10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
 3. input file in FASTA format of total amount of monomer units that can be used to generate momomer.
@@ -65,7 +65,7 @@ separate compilation of all source files in VC++
 [Improvement](https://github.com/parthian-sterlet/antinoise/blob/master/src/mix0.cpp) program introduce mutation of nucleotides in non-core regions of a polymer.
 1. path to files of (a) the target TF DNA motif and (b) its threshold list, this file contains the list of pairs {Threshold, -Log10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
 2. path to files of (a) all non-target TFs DNA motifs and (b) their threshold lists, these files contain the lists of pairs {Threshold, -Log10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
-3. input file in FASTA format with a DNA sequence of polymer selected by the previous analysis step, the first block, [Unit order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp)
+3. input file in FASTA format with a DNA sequence of polymer selected by the previous analysis step, the first block, [Order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp)
 4. file of tab-delimited table, this table marks positions in the polymer non-cores regions (spacers between the essential cores) and flanking sequences before/after the first/last monomers of the polymer
 5. integer value, count of motifs in library, default number is 528, it implies DNA motifs of *A.thaliana* TFs from [Plant Cistrome](http://neomorph.salk.edu/dap_web/pages/index.php) database, from DAP-seq experoment ([O’Malley et al., 2016](https://doi.org/10.1016/j.cell.2016.08.063))
 6. char name of motif file, the default value "dapseq" means (a) for non-target TFs: the motif files dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the motif file dapseq0.pwm and the threshold list file dapseq0.dist.
@@ -77,6 +77,6 @@ separate compilation of all source files in VC++
 # Examples scripts:
 
 These scripts implement various blocks for Linux OS:
-1. [Unit order](https://github.com/parthian-sterlet/gsga/blob/master/src/order) - First block defines the composition and monomer order of native units
-2. [Improvement](https://github.com/parthian-sterlet/gsga/blob/master/src/imrovemnet) - Second block improves a polymer of native units to a polymer of synthetic units by nucleotide mutations in the non-core regions
-3. [Degradation](https://github.com/parthian-sterlet/gsga/blob/master/src/degradation) - Destroys a polymer of synthetic units by nucleotide mutations in the core regions
+1. [Order](https://github.com/parthian-sterlet/gsga/blob/master/src/order) - First block defines the composition and monomer order of native units
+2. [Improvement](https://github.com/parthian-sterlet/gsga/blob/master/src/imrovemnet) - Second block improves a polymer of native units to a polymer of synthetic units by single nucleotide mutations within the non-core regions
+3. [Degradation](https://github.com/parthian-sterlet/gsga/blob/master/src/degradation) - Third block destroys a polymer of synthetic units by single nucleotide mutations withiin the core regions
