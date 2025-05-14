@@ -98,6 +98,11 @@ separate compilation of all source files in VC++
 9. double value, the probability P of nucleotide substitutions (SNS) within designated elements, P value is equal to the ratio between the number of mutation and sequence length, the number of substitutions is the same for each non-core/core spacer between two neighbor core/non-core regions for Improve/Desrtoy options.
 10. output log file showing the progress in calculation.
 
+## Supplementary programs
+These programs are described in [MCOT repository](https://github.com/parthian-sterlet/mcot-kernel/tree/master#generation-of-partner-library)
+[Convertion from DNA motif as Position Frequency Matrix (PFM) to Position Weight Matrix (PWM)](https://github.com/parthian-sterlet/mcot-kernel/blob/master/src/pfm_to_pwm/pfm_to_pwm_mat.cpp)
+[Computation of threshold list of pairs {Threshold, -Log10(ERR)} values for the motif defined by PFM and PWM](https://github.com/parthian-sterlet/mcot-kernel/blob/master/src/pwm_thr_err/pwm_iz_pwm_thr_dist0.cpp)
+
 # Examples command lines:
 
 These command lines implement various steps for Linux OS:
