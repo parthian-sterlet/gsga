@@ -71,8 +71,8 @@ separate compilation of all source files in VC++
 2. path to files of (a) all non-target TFs DNA motifs and (b) their threshold lists, these files contain the lists of pairs {Threshold, -10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
 3. input file in FASTA format of total amount of monomer units that can be used to generate momomer.
 4. integer value, count of selected monomer units in a polymer, default number is 10.
-5. integer value, count of motifs in library, default number is 528, it implies DNA motifs of *A.thaliana* TFs from [Plant Cistrome](http://neomorph.salk.edu/dap_web/pages/index.php) database, from DAP-seq experoment ([O’Malley et al., 2016](https://doi.org/10.1016/j.cell.2016.08.063)
-6. char name of motif file, the default value "dapseq" means (a) for non-target TFs: the motif files dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the motif file. .dapseq0.pwm and the threshold list file dapseq0.dist.
+5. integer value, count of motifs in library, default number is 528, it implies DNA motifs of *A.thaliana* TFs from [Plant Cistrome](http://neomorph.salk.edu/dap_web/pages/index.php) database, from DAP-seq experoment ([O’Malley et al., 2016](https://doi.org/10.1016/j.cell.2016.08.063))
+6. char name of motif file, the default value "dapseq" means (a) for the non-target TFs: the motif files dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the motif file dapseq0.pwm and the threshold list file dapseq0.dist.
 7. output file listing results, i.e. the multiple solutions in the FASTA format in the descending order of the qulity.
 8. output log file showing the progress in calculation.
 
@@ -83,7 +83,7 @@ separate compilation of all source files in VC++
 3. input file in FASTA format with a DNA sequence of polymer selected by the previous analysis step, the first block, [Order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp)
 4. file of tab-delimited table, this table marks positions in the polymer non-cores regions (spacers between the essential cores) and flanking sequences before/after the first/last monomers of the polymer
 5. integer value, count of motifs in library, default number is 529, it implies 528 DNA motifs of *A.thaliana* TFs from [Plant Cistrome](http://neomorph.salk.edu/dap_web/pages/index.php) database, from DAP-seq experoment ([O’Malley et al., 2016](https://doi.org/10.1016/j.cell.2016.08.063))
-6. char name of motif file, the default value "dapseq" means (a) for non-target TFs: the motif files dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the motif file dapseq0.pwm and the threshold list file dapseq0.dist.
+6. char name of motif file, the default value "dapseq" means (a) for the non-target TFs: the motif files dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the motif file dapseq0.pwm and the threshold list file dapseq0.dist.
 7. output file, log file listing results, i.e. the solution in the descending order of the qulity.
 8. integer value, the anchor mode. The values 1 or 0 mean that a specific matrix of a target TF is used / not used for optimization.
 9. double value, the probability P of nucleotide substitutions (SNS) within designated elements, P value is equal to the ratio between the number of mutation and sequence length, the number of substitutions is the same for each non-core spacer between two neighbor core regions.
