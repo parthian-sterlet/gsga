@@ -1,1 +1,1 @@
-./genosensor_seq_ga.exe ../examples/destroy/ ../matrices/dapseq/ ../examples/improve/gc_ebs_2nd.fa ../examples/improve/ebs_c_spacers 529 dapseq out_ga3 0 0.4 out_log3
+./genosensor_seq_ga.exe ../examples/destroy/ ../matrices/dapseq/ ../examples/destroy/gc_ebs_2nd.fa ../examples/destroy/ebs_c_spacers 529 dapseq out_ga3 0 0.4 out_log3
