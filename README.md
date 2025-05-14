@@ -34,8 +34,8 @@ Folder [**library**](https://github.com/parthian-sterlet/gsga/tree/main/library)
 
 ## First step, GA1, Ante mare undae
 To generate a new polymer, the default number of TOut = 10 monomers are required in a polymer. The total number of distinct input monomer units TIn should be higher, TOut >= TIn = 10, to support the polymer specificity. These TIn monomers are presumed to be the native DNA sequences supported by ChIP-seq/RNA-seq etc. experimental edidence of specific binding of the target TF. The task of the first step is dual: 
-1. to select exact output Tout monomers among the total TIn provided in input data; 
-2. to denote the exact order of TOut selected monomers.
+1. to select exact output TOut monomers among the total TIn provided in input data; 
+2. to denote the exact order of these TOut selected monomers.
 
 For example, if we have 20 input monomers {T1, T2, ... T20}, then the example version of the ouput order of the selected top-scored ten monomers is {T17, T2, T5, T13, T4, T1, T18, T9, T15, T11}. To find an optimal combination, GA of the first step (GA1) selects the multiple versions of polymers with the least susceptibility to the non-target TFs binding. As input data, GA1 requires:
 * a set of TIn monomer units containing individual binding sites of the target TF; 
