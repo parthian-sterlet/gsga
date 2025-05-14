@@ -1,1 +1,1 @@
-./genosensor_seq_order_ga.exe ../examples/order/ ../matrices/ ein3_20mer_GCebs.seq 10 529 dapseq out.ga1 out.log1
+./genosensor_seq_order_ga.exe ../examples/order/ ../matrices/ ein3_20mer_GCebs.seq 10 529 dapseq out_ga1 out_log1
