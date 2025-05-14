@@ -24,11 +24,14 @@ Folder [**library**](https://github.com/parthian-sterlet/gsga/tree/main/library)
 # Common input data for all blocks
 (1) a set of weight matrices for off-target TFs; (2) a set of preliminarily computed lists of thresholds and respective ERRs for each matrix ([Tsukanov et al. 2022](https://doi.org/10.3389/fpls.2022.938545); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800); [Levitsky et al., 2024](https://doi.org/10.18699/vjgb-24-90)).
 
-## First block
-To generate a new polymer, the default number of TOut = 10 monomers are stacked in a polymer. Note the defthat number of distinct input monomers TIn should be higher, TOut >= TIn = 10, to support the polymer specificity. Note that these TIn monomers are presumed to be the native DNA sequences supporte by ChIP-seq/RNA-seq etc. experimental edidence of specific binding of the target TF. The task of the first block is dual: (1) to select exact output Tout monomers among the total TIn provided in input data; (2) to denote the exact order of TOut selected monomers. For example, let we have 20 input monomers {T1, T2, ... T20}, then the version of the ouput order is {T17, T2, T5, T13, T4, T1, T18, T9, T15, T11}. To find an optimal combination, a genetic algorithm of the first block (GA1) selects the multiple versions of polymers with the least susceptibility to off-target TFs binding. 
+## First block, GA1, Ante mare undae
+To generate a new polymer, the default number of TOut = 10 monomers are stacked in a polymer. Note the defthat number of distinct input monomers TIn should be higher, TOut >= TIn = 10, to support the polymer specificity. Note that these TIn monomers are presumed to be the native DNA sequences supporte by ChIP-seq/RNA-seq etc. experimental edidence of specific binding of the target TF. The task of the first block is dual: (1) to select exact output Tout monomers among the total TIn provided in input data; (2) to denote the exact order of TOut selected monomers. For example, let we have 20 input monomers {T1, T2, ... T20}, then the version of the ouput order is {T17, T2, T5, T13, T4, T1, T18, T9, T15, T11}. To find an optimal combination, a genetic algorithm of the first block (GA1) selects the multiple versions of polymers with the least susceptibility to off-target TFs binding. As input data, GA1 uses (1) a set of TIn sequences (monomers) containing individual binding sites of the target TF, (2) the number of TOut monomer units of a polymer, (3) a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix.
 
-## Second block
-The second block the second genetic algorithm (GA2) selects appropriate SNS outside the essential positions the target TF binding in each monomer. Hence, GA2 requires (1) a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores); (2) a matrix for the target TF; (3) a list of thresholds and respective ERRs for this matrix; (4) a list of positions in the polymer (the assembled sequence from the first block) designating spacers between the essential cores and non-core elements, and flanking sequence before/after the first/last monomer units of the polymer; (5) the probability P of nucleotide substitutions  (SNS) within designated elements. 
+## Second block, GA2, Non est terminus ad perfectionem
+The second block the second genetic algorithm (GA2) selects appropriate SNS outside the essential positions the target TF binding in each monomer. Hence, GA2 requires (1) a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores); (2) a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix; (3) a list of positions in the polymer (the assembled sequence from the first block) designating spacers between the essential cores and non-core elements, and flanking regions before/after the first/last monomer units of the polymer; (4) the probability P of nucleotide substitutions (SNS) within non-core elements. 
+
+## Third block, GA3, Caedite eos. Novit enim Dominus qui sunt eius
+The third block is another application of approach developped for the preceedin second block. Here the same source code is applied to destroy any DNA binding motif, hence it is not important here BSs of which TF to exclude. Hence, BSs of neither target nor non-target TFs are now undesirable. Hence, GA3 requires (1) a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores), this polymer may be the result of either the first or second block; (2) a list of positions in the polymer designating the essential cores between the non-core regions and flanking regions before/after the first/last essential cores of the polymer; (3) the probability P of nucleotide substitutions (SNS) within core elements.
 
 # Command line arguments
 
@@ -36,12 +39,12 @@ The second block the second genetic algorithm (GA2) selects appropriate SNS outs
 [Unit order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp) propgram defines the composition of units and their order. 
 1. path to files of (a) the target TF DNA motif and (b) its threshold list, this file contains the list of pairs {Threshold, -10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
 2. path to files of (a) all non-target TFs DNA motifs and (b) their threshold lists, these files contain the lists of pairs {Threshold, -10(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
-3. input file in FASTA format of total amount of monomer units that can be used to generate momomer
-4. integer value, count of selected monomer units in a polymer, default number is 10
+3. input file in FASTA format of total amount of monomer units that can be used to generate momomer.
+4. integer value, count of selected monomer units in a polymer, default number is 10.
 5. integer value, count of motifs in library, default number is 528, it implies DNA motifs of *A.thaliana* TFs from [Plant Cistrome](http://neomorph.salk.edu/dap_web/pages/index.php) database, from DAP-seq experoment ([O’Malley et al., 2016](https://doi.org/10.1016/j.cell.2016.08.063)
-6. char name of motif file, the default value "dapseq" means (a) for non-target TFs: the motif files dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the motif file dapseq0.pwm and the threshold list file dapseq0.dist
-7. output file listing results, i.e. the multiple solutions in the FASTA format in the descending order of the qulity
-8. output log file showing the progress in calculation
+6. char name of motif file, the default value "dapseq" means (a) for non-target TFs: the motif files dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the motif file. .dapseq0.pwm and the threshold list file dapseq0.dist.
+7. output file listing results, i.e. the multiple solutions in the FASTA format in the descending order of the qulity.
+8. output log file showing the progress in calculation.
 
 ## 2. Improvement of a polymer of native units by single nucleotide mutations within non-core regions of polymer
 [Improvement](https://github.com/parthian-sterlet/antinoise/blob/master/src/mix0.cpp) program introduce mutation of nucleotides in non-core regions of a polymer.
@@ -50,15 +53,15 @@ The second block the second genetic algorithm (GA2) selects appropriate SNS outs
 3. input file in FASTA format with a DNA sequence of polymer selected by the previous analysis step, the first block, [Unit order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp)
 4. file of tab-delimited table, this table marks positions in the polymer non-cores regions (spacers between the essential cores) and flanking sequences before/after the first/last monomers of the polymer
 5. integer value, count of motifs in library, default number is 528, it implies DNA motifs of *A.thaliana* TFs from [Plant Cistrome](http://neomorph.salk.edu/dap_web/pages/index.php) database, from DAP-seq experoment ([O’Malley et al., 2016](https://doi.org/10.1016/j.cell.2016.08.063))
-6. char name of motif file, the default value "dapseq" means (a) for non-target TFs: the motif files dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the motif file dapseq0.pwm and the threshold list file dapseq0.dist
-7. output file, log file listing results, i.e. the solution in the descending order of the qulity
+6. char name of motif file, the default value "dapseq" means (a) for non-target TFs: the motif files dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the motif file dapseq0.pwm and the threshold list file dapseq0.dist.
+7. output file, log file listing results, i.e. the solution in the descending order of the qulity.
 8. integer value, the anchor mode. The values 1 or 0 mean that a specific matrix of a target TF is used / not used for optimization.
 9. double value, the probability P of nucleotide substitutions (SNS) within designated elements, P value is equal to the ratio between the number of mutation and sequence length, the number of substitutions is the same for each non-core spacer between two neighbor core regions.
-10. output log file showing the progress in calculation
+10. output log file showing the progress in calculation.
 
 # Examples scripts:
 
 These scripts implement various blocks for Linux OS:
 1. [Unit order](https://github.com/parthian-sterlet/gsga/blob/master/src/order) - First block defines the composition and monomer order of native units
-2. [Improvement](https://github.com/parthian-sterlet/gsga/blob/master/src/imrovemnet) - Swcond block improves a polymer of native units to a polymer of synthetic units by nucleotide mutations in the non-core regions
+2. [Improvement](https://github.com/parthian-sterlet/gsga/blob/master/src/imrovemnet) - Second block improves a polymer of native units to a polymer of synthetic units by nucleotide mutations in the non-core regions
 3. [Degradation](https://github.com/parthian-sterlet/gsga/blob/master/src/degradation) - Destroys a polymer of synthetic units by nucleotide mutations in the core regions
