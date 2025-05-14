@@ -107,5 +107,5 @@ These programs are described in [MCOT repository](https://github.com/parthian-st
 
 These command lines implement various steps for Linux OS:
 1. [Order](https://github.com/parthian-sterlet/gsga/blob/master/src/order) - First step defines the composition and monomer order of native units
-2. [Improve](https://github.com/parthian-sterlet/gsga/blob/master/src/imrove) - Second step improves a polymer of native units to a polymer of synthetic units by single nucleotide mutations within the non-core regions
-3. [Destroy](https://github.com/parthian-sterlet/gsga/blob/master/src/destroy) - Third step destroys a polymer of synthetic units by single nucleotide mutations withiin the core regions
+2. [Improve](https://github.com/parthian-sterlet/gsga/blob/master/src/imrove) - Second step improves a polymer of native units to a polymer of synthetic units by SNSs within the non-core regions
+3. [Destroy](https://github.com/parthian-sterlet/gsga/blob/master/src/destroy) - Third step destroys a polymer of native or synthetic units by SNSs withiin the core regions
