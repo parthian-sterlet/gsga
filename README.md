@@ -30,7 +30,7 @@ Folder [**library**](https://github.com/parthian-sterlet/gsga/tree/main/library)
 
 # Common input data for all steps
 * a set of weight matrices for non-target TFs;
-* a set of preliminarily computed lists of thresholds and respective ERRs for each weight matrix ([Tsukanov et al. 2022](https://doi.org/10.3389/fpls.2022.938545); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800); [Levitsky et al., 2024](https://doi.org/10.18699/vjgb-24-90)).
+* a set of preliminarily computed lists of thresholds and respective ERRs for each weight matrix ([Tsukanov et al., 2022](https://doi.org/10.3389/fpls.2022.938545); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800); [Levitsky et al., 2024](https://doi.org/10.18699/vjgb-24-90)).
 
 ## First step, GA1, Ante mare undae
 To generate a new polymer, the default number of TOut = 10 monomers are required in a polymer. The total number of distinct input monomer units TIn should be higher, TOut >= TIn = 10, to support the polymer specificity. These TIn monomers are presumed to be the native DNA sequences supported by ChIP-seq/RNA-seq etc. experimental edidence of specific binding of the target TF. The task of the first step is dual: 
