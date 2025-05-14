@@ -13,7 +13,7 @@ The source code is written in C++ language. To compile exetubables from the sour
 # Repository structure
 Folder [**src**](https://github.com/parthian-sterlet/gsga/tree/main/src) contains two major C++ source code files.  
 
-Folder [**run**](https://github.com/parthian-sterlet/gsga/tree/main/run) contains three main scripts and the corresponding three main command line examples, implementing different steps of the polymer search.
+Folder [**run**](https://github.com/parthian-sterlet/gsga/tree/main/run) contains the main [script](https://github.com/parthian-sterlet/gsga/blob/main/run/build.sh) for source code compliation, the three main scripts and the corresponding three command line examples, implementing different steps of the polymer search.
 
 Folder [**examples**](https://github.com/parthian-sterlet/gsga/tree/main/examples) contains the functional examples of the three main steps of the polymer search.
 
@@ -32,6 +32,21 @@ The second block the second genetic algorithm (GA2) selects appropriate SNS outs
 
 ## Third block, GA3, Caedite eos. Novit enim Dominus qui sunt eius
 The third block is another application of approach developped for the preceedin second block. Here the same source code is applied to destroy any DNA binding motif, hence it is not important here BSs of which TF to exclude. Hence, BSs of neither target nor non-target TFs are now undesirable. Hence, GA3 requires (1) a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores), this polymer may be the result of either the first or second block; (2) a list of positions in the polymer designating the essential cores between the non-core regions and flanking regions before/after the first/last essential cores of the polymer; (3) the probability P of nucleotide substitutions (SNS) within core elements.
+
+# How to compile
+* In Linux system: 
+
+git clone https://github.com/parthian-sterlet/gsga
+
+cd gsga/run
+
+chmod a+x build.sh
+
+./build.sh
+
+* In Windiws system:
+
+separate compilation of all source files in VC++
 
 # Command line arguments
 
