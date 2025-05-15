@@ -5,9 +5,9 @@ GSGA is is abbreviated as Genetic Sensor generation by Genetic Algorithm. GSGA i
 The GSGA program complex (PC) is designed to select synthetic polymers (tandem arrays) of DNA sequence monomer units. These units are separate TFBSs of lengths from 7-8 to 20-30 base pairs (bp). They are also called cis-regulatory elements or individual binding sites (BS) of the target transcription factor (TF). Target TF implies the TF for which specific DNA binding is expected in the experiment. PC requires the collection of DNA motifs ([D'haeseleer, 2006](https://doi.org/10.1038/nbt0406-423)) representing BS models of different TFs from public databases of TFBS motifs. Currently PC is adopted for motifs of *A. thaliana* TFs from [Plant Cistrome](http://neomorph.salk.edu/dap_web/pages/index.php) database, it represents motifs derived by the *in vitro* DAP-seq technology ([O’Malley et al., 2016](https://doi.org/10.1016/j.cell.2016.08.063)). PC can be easily adopted for TFs from other taxa, e.g. mammals (human/mouse) and insects (drosophila), e.g. from [Hocomoco](https://hocomoco13.autosome.org/) ([Vorontsov et al., 2024](https://doi.org/10.1093/nar/gkad1077)) or [JASPAR](https://jaspar.elixir.no/) ([Rauluseviciute et al., 2024](https://doi.org/10.1093/nar/gkad1059)). PC applies the standard motif model of position weight matrix (PWM) [(Wasserman & Sandelin, 2004)](https://doi.org/10.1038/nrg1315). PC searches for polymers in which the recognition scores of the given motif of the target TF BSs is maximized and the recognition scores of all other motifs defining BSs of non-target TFs are minimized. The default polymer contains T<sub>OUT</sub> = 10 monomer units, each unit has length of about 20-25 bp, it is presumed that the central 5-12 bp of each unit are essential for TF binding (core region) and its 5'/3' flanking 7-10 bp allow more variability (non-cores regions). Hence, PC can be used to design the structure of a polymer as an oligonucleotide of about 200-250 bp in length.
 
 For polymer definition PC implements the approach of genetic algorithm (GA). PC applies three consecutive steps:
-* the first step (GA1) creates the polymer, i.e. it selects participating units and defines their exact order;
-* the second step (GA2) improves the polymer by introducing single-nucleotide substitutions (SNSs) within non-core regions;
-* the third step (GA3) destroys  the polymer given as a result of the first or second step by introducing SNSs within the core regions.
+* the first step (GA<sub>1</sub>) creates the polymer, i.e. it selects participating units and defines their exact order;
+* the second step (GA<sub>2</sub>) improves the polymer by introducing single-nucleotide substitutions (SNSs) within non-core regions;
+* the third step (GA<sub>3</sub>) destroys  the polymer given as a result of the first or second step by introducing SNSs within the core regions.
 
 Generally GAs were developed according to the principles published earlier ([Levitsky et al., 2007](https://doi.org/10.1186/1471-2105-8-481); [Tsukanov et al. 2022](https://doi.org/10.3389/fpls.2022.938545)). To start each step, each GA generates a population of randomly chosen solutions and gradually improves them to obtain the final set of solutions. For the first and second/third steps the solutions are a set of polymers and a set of SNS patterns for the certain input polymer, correspondingly. PC evaluates the solutions using a rank-based weighting scheme for motifs of potential TFBSs, and applies GAs to optimize the population of individuals, i.e. distinct polymers and SNS patterns for the first and second/third step, respectively. 
 
@@ -38,25 +38,25 @@ To make the recognition for all DNA motifs uniform, each threshold respects the 
 * a set of weight matrices for non-target TFs;
 * a set of preliminarily computed lists of thresholds and respective ERRs for each weight matrix ([Tsukanov et al., 2022](https://doi.org/10.3389/fpls.2022.938545); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800); [Levitsky et al., 2024](https://doi.org/10.18699/vjgb-24-90)).
 
-## First step, GA1
+## First step, GA<sub>1</sub>
 To generate a new polymer, the default number of T<sub>OUT</sub> = 10 monomers are required in a polymer. The total number of distinct input monomer units T<sub>IN</sub> should be higher, T<sub>IN</sub> >= T<sub>OUT</sub> = 10, to support the polymer specificity. These T<sub>IN</sub> monomers are presumed to be the native DNA sequences supported by ChIP-seq/RNA-seq etc. experimental edidence of specific binding of the target TF. The task of the first step is dual: 
 1. to select exact outputT<sub>OUT</sub> monomers among the total T<sub>IN</sub> provided in input data; 
 2. to denote the exact order of these T<sub>OUT</sub> selected monomers.
 
-For example, if we have 20 input monomers {M<sub>1</sub>, M<sub>2</sub>, ... M<sub>20</sub>}, then the example version of the ouput order of the selected top-scored ten monomers is {M<sub>17</sub>, M<sub>2</sub>, M<sub>5</sub>, M<sub>13</sub>, M<sub>4</sub>, M<sub>1</sub>, M<sub>18</sub>, M<sub>9</sub>, M<sub>15</sub>, M<sub>11</sub>}. To find an optimal combination, GA of the first step (GA1) selects the multiple versions of polymers with the least susceptibility to the non-target TFs binding. As input data, GA1 requires:
+For example, if we have 20 input monomers {M<sub>1</sub>, M<sub>2</sub>, ... M<sub>20</sub>}, then the example version of the ouput order of the selected top-scored ten monomers is {M<sub>17</sub>, M<sub>2</sub>, M<sub>5</sub>, M<sub>13</sub>, M<sub>4</sub>, M<sub>1</sub>, M<sub>18</sub>, M<sub>9</sub>, M<sub>15</sub>, M<sub>11</sub>}. To find an optimal combination, GA of the first step (GA<sub>1</sub>) selects the multiple versions of polymers with the least susceptibility to the non-target TFs binding. As input data, GA<sub>1</sub> requires:
 * a set of T<sub>IN</sub> monomer units containing individual binding sites of the target TF; 
 * the number of T<sub>OUT</sub> monomer units of a polymer; 
 * a weight matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix.
 
-## Second step, GA2
-The second step (GA2) selects appropriate SNS outside the essential positions the target TF binding in each monomer. Hence, GA2 requires: 
+## Second step, GA<sub>2</sub>
+The second step (GA<sub>2</sub>) selects appropriate SNS outside the essential positions the target TF binding in each monomer. Hence, GA<sub>2</sub> requires: 
 * a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores); 
 * a weight matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix; 
 * a list of positions in the polymer (the assembled sequence from the first step) designating non-core elements, and flanking regions before/after the first/last monomer units of the polymer; 
 * the probability of SNSs within non-core elements. 
 
-## Third step, GA3
-The third step (GA3) is another application of approach developped for the preceeding second step (GA2). Here the same source code is applied to destroy any DNA binding motif, hence it is not important here BSs of which TF to exclude. Hence, BSs of neither target nor non-target TFs are now undesirable. Hence, GA3 requires:
+## Third step, GA<sub>3</sub>
+The third step (GA<sub>3</sub>) is another application of approach developped for the preceeding second step (GA<sub>2</sub>). Here the same source code is applied to destroy any DNA binding motif, hence it is not important here BSs of which TF to exclude. Hence, BSs of neither target nor non-target TFs are now undesirable. Hence, GA<sub>3</sub> requires:
 * a polymer assembled from the units comprising the target TF binding site (the essential cores) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores), this polymer may be the result of either the first or second step;
 * a list of positions in the polymer designating the essential cores regions;
 * the probability of SNSs within core elements.
