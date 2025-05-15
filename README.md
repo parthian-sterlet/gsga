@@ -118,14 +118,13 @@ but not
 
 ``` // int m_ignore[] = ```
 
-since the first symbols in a line '//' mark a [comment in c++ language](https://learn.microsoft.com/en-us/cpp/cpp/comments-cpp?view=msvc-170)).
+since the first symbols in a line '//' mark a [comment in c++ language](https://learn.microsoft.com/en-us/cpp/cpp/comments-cpp?view=msvc-170).
 
 The default content of this line is 
 
 ```int m_ignore[] = { 2, 102, 183, 184, 186, 207, 212, 213, 217, 227, 286, 299, 300, 303, 439, -1 };// no anchor 2024 ```
 
-It respects the default option in ignoring motifs, the program ignores only too short and degenerate DAP motifs, this is explained in the MCOT paper ([Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800)). The numbers of all motifs showing the high sinilarity to the tested motif of the target TF should be added to the list of this line. Note that the stadard criterion p-value < 0.05 is too mild, the Bonferroni correction is p-adjusted < 0.05 / 528 < 0.0001, at least this threshold may be applied to find the similar motifs. 
-
+It respects the default option in ignoring motifs, the program ignores only too short and degenerate DAP motifs, this is explained in the MCOT paper ([Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800)). The numbers of all motifs showing the high sinilarity to the tested motif of the target TF should be added to the list of this line. Note that the standard criterion p-value < 0.05 is too mild, the Bonferroni correction is p-adjusted < 0.05 / 528 < 0.0001, at least this threshold may be applied to find the significantly similar motifs. 
 
 # Examples command lines:
 
