@@ -46,12 +46,12 @@ To generate a new polymer, the default number of T<sub>OUT</sub> = 10 monomers a
 For example, if we have 20 input monomers {M<sub>1</sub>, M<sub>2</sub>, ... M<sub>20</sub>}, then the example version of the ouput order of the selected top-scored ten monomers is {M<sub>17</sub>, M<sub>2</sub>, M<sub>5</sub>, M<sub>13</sub>, M<sub>4</sub>, M<sub>1</sub>, M<sub>18</sub>, M<sub>9</sub>, M<sub>15</sub>, M<sub>11</sub>}. To find an optimal combination, GA of the first step (GA1) selects the multiple versions of polymers with the least susceptibility to the non-target TFs binding. As input data, GA1 requires:
 * a set of T<sub>IN</sub> monomer units containing individual binding sites of the target TF; 
 * the number of T<sub>OUT</sub> monomer units of a polymer; 
-* a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix.
+* a weight matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix.
 
 ## Second step, GA2
 The second step (GA2) selects appropriate SNS outside the essential positions the target TF binding in each monomer. Hence, GA2 requires: 
 * a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores); 
-* a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix; 
+* a weight matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix; 
 * a list of positions in the polymer (the assembled sequence from the first step) designating non-core elements, and flanking regions before/after the first/last monomer units of the polymer; 
 * the probability of SNSs within non-core elements. 
 
