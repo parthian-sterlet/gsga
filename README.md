@@ -90,7 +90,7 @@ separate compilation of all source files in VC++
 7. output file listing results, i.e. the multiple solutions in the FASTA format in the descending order of the qulity.
 8. output log file showing the progress in calculation.
 
-## 2. Second & Third steps: Improve a polymer of native units by single nucleotide mutations within the non-core regions of polymer & Destroy a polymer of native or synthetic units by single nucleotide mutations withiin the core regions
+## 2. Second & Third steps: Improve a polymer of native units by SNSs within the non-core regions of polymer & Destroy a polymer of native or synthetic units by SNSs withiin the core regions
 [Improve and Destroy](https://github.com/parthian-sterlet/gsga/blob/master/src/genosensor_seq_ga.cpp) program implements two distict tasks by introducing mutations of nucleotides: 
 * Second step: SNSs are allowed only in the non-core regions of a polymer thereby improving the binding of the target TF and restricting the binding of non-target TFs, or
 * Third step: SNSs are allowed only in the non-core regions of a polymer thereby restricting the binding of any TFs either the target or non-target. 
