@@ -58,7 +58,7 @@ The third step (GA3) is another application of approach developped for the prece
 # How to compile
 * In Linux system: 
 
-'''
+```
 git clone https://github.com/parthian-sterlet/gsga
 
 cd gsga/run
@@ -66,7 +66,7 @@ cd gsga/run
 chmod a+x build.sh
 
 ./build.sh
-'''
+```
 
 * In Windiws system:
 
