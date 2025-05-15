@@ -51,13 +51,13 @@ The second step (GA2) selects appropriate SNS outside the essential positions th
 * a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores); 
 * a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix; 
 * a list of positions in the polymer (the assembled sequence from the first step) designating spacers between the essential cores and non-core elements, and flanking regions before/after the first/last monomer units of the polymer; 
-* the probability P of nucleotide substitutions (SNS) within non-core elements. 
+* the probability P of SNSs within non-core elements. 
 
 ## Third step, GA3
 The third step (GA3) is another application of approach developped for the preceeding second step (GA2). Here the same source code is applied to destroy any DNA binding motif, hence it is not important here BSs of which TF to exclude. Hence, BSs of neither target nor non-target TFs are now undesirable. Hence, GA3 requires:
 * a polymer assembled from the units comprising the target TF binding site (the essential cores) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores), this polymer may be the result of either the first or second step;
 * a list of positions in the polymer designating the essential cores between the non-core regions and flanking regions before/after the first/last essential cores of the polymer;
-* the probability P of nucleotide substitutions (SNS) within core elements.
+* the probability P of SNSs within core elements.
 
 # How to compile
 ## In Linux system: 
@@ -86,7 +86,7 @@ separate compilation of all source files in VC++
 3. input file in FASTA format of total amount of monomer units that can be used to generate momomer.
 4. integer value, count of selected monomer units in a polymer, default number is 10.
 5. integer value, count of motifs in library, default number is 528, it implies DNA motifs of *A.thaliana* TFs from [Plant Cistrome](http://neomorph.salk.edu/dap_web/pages/index.php) database, from DAP-seq experoment ([O’Malley et al., 2016](https://doi.org/10.1016/j.cell.2016.08.063))
-6. char name of motif file, the default value "dapseq" means (a) for the non-target TFs: the weight matrix files are dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files are dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the weight matrix file is dapseq0.pwm and the threshold list file is dapseq0.dist.
+6. char* value, name of motif file, the default value "dapseq" means (a) for the non-target TFs: the weight matrix files are dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files are dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the weight matrix file is dapseq0.pwm and the threshold list file is dapseq0.dist.
 7. output file listing results, i.e. the multiple solutions in the FASTA format in the descending order of the qulity.
 8. output log file showing the progress in calculation.
 
@@ -100,7 +100,7 @@ separate compilation of all source files in VC++
 3. input file in FASTA format with a DNA sequence of polymer selected by the previous analysis step, the first step, [Order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp)
 4. file of tab-delimited table, this table marks positions in the polymer non-cores regions (spacers between the essential cores) and flanking sequences before/after the first/last monomers of the polymer
 5. integer value, count of motifs in library, default number is 529, it implies 528 DNA motifs of *A.thaliana* TFs from [Plant Cistrome](http://neomorph.salk.edu/dap_web/pages/index.php) database, from DAP-seq experoment ([O’Malley et al., 2016](https://doi.org/10.1016/j.cell.2016.08.063))
-6. char name of motif file, the default value "dapseq" means (a) for the non-target TFs: the weight matrix files are dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files are dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the weight matrix file is dapseq0.pwm and the threshold list file is dapseq0.dist.
+6. char* value, name of motif file, the default value "dapseq" means (a) for the non-target TFs: the weight matrix files are dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files are dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the weight matrix file is dapseq0.pwm and the threshold list file is dapseq0.dist.
 7. output file, log file listing results, i.e. the multiple solutions in the descending order of the qulity.
 8. integer value, the anchor mode. The values 1 or 0 mean the Improve/Destroy option respecting the Second/Third steps of analysis. In these cases a specific weight matrix of a target TF is opposed / is not opposed to matrices of all non-target TFs.
 9. double value, the probability P of nucleotide substitutions (SNS) within designated elements, P value is equal to the ratio between the number of mutation and sequence length, the number of substitutions is the same for each non-core/core spacer between two neighbor core/non-core regions for Improve/Desrtoy options.
