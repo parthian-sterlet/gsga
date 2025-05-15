@@ -60,7 +60,7 @@ The third step (GA3) is another application of approach developped for the prece
 * the probability P of nucleotide substitutions (SNS) within core elements.
 
 # How to compile
-* In Linux system: 
+## In Linux system: 
 
 ```
 git clone https://github.com/parthian-sterlet/gsga
@@ -72,7 +72,7 @@ chmod a+x build.sh
 ./build.sh
 ```
 
-* In Windiws system:
+## In Windiws system:
 
 separate compilation of all source files in VC++
 
@@ -132,7 +132,7 @@ Such line respects the default option in ignoring motifs, the program ignores on
 
 # Examples command lines:
 
-These command lines implement various steps for Linux OS:
+These example command lines implement various steps for Linux OS:
 1. [Order](https://github.com/parthian-sterlet/gsga/blob/master/src/order) - First step defines the composition and monomer order of native units
 2. [Improve](https://github.com/parthian-sterlet/gsga/blob/master/src/imrove) - Second step improves a polymer of native units to a polymer of synthetic units by SNSs within the non-core regions
 3. [Destroy](https://github.com/parthian-sterlet/gsga/blob/master/src/destroy) - Third step destroys a polymer of native or synthetic units by SNSs withiin the core regions
