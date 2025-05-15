@@ -18,7 +18,7 @@ The source code is written in C++ language. To compile exetubables from the sour
 * In Windows system any VC++ package, e.g. [Microsoft Visual Studio Community](https://visualstudio.microsoft.com/vs/community/)
 
 # Repository structure
-Folder [**src**](https://github.com/parthian-sterlet/gsga/tree/main/src) contains two major C++ source code files and two supplementary C++ source code files.  
+Folder [**src**](https://github.com/parthian-sterlet/gsga/tree/main/src) contains two major C++ source code files, and two supplementary C++ source code files are provided in [MCOT repository]{https://github.com/parthian-sterlet/mcot-kernel).  
 
 Folder [**run**](https://github.com/parthian-sterlet/gsga/tree/main/run) contains the main [script](https://github.com/parthian-sterlet/gsga/blob/main/run/build.sh) for source code compliation, the three main scripts and the corresponding three command line examples, implementing different steps of the polymer search.
 
