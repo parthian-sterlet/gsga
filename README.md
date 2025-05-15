@@ -58,6 +58,7 @@ The third step (GA3) is another application of approach developped for the prece
 # How to compile
 * In Linux system: 
 
+'''
 git clone https://github.com/parthian-sterlet/gsga
 
 cd gsga/run
@@ -65,6 +66,7 @@ cd gsga/run
 chmod a+x build.sh
 
 ./build.sh
+'''
 
 * In Windiws system:
 
@@ -104,7 +106,9 @@ These programs are described in [MCOT repository](https://github.com/parthian-st
 * Computation of the threshold list consisting of pairs of values {Threshold, -Log10(ERR)} for the DNA motif defined by PFM and PWM, [pwm_iz_pwm_thr_dist0.cpp](https://github.com/parthian-sterlet/mcot-kernel/blob/master/src/pwm_thr_err/pwm_iz_pwm_thr_dist0.cpp). This program computes the recognition thresholds as the list of pairs of values {Threshold, -Log10(ERR)} (see [example distribution](https://github.com/parthian-sterlet/gsga/blob/main/examples/improve/dapseq0.dist)) for a given weight matrix, see [example weight matrix](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.pwm)
 
 # Selction of matrices of the target and non-target TFs
-Examples provides in this repository show the EIN3 motif from the DAP-seq collection as the motif of the target TFs. To perform the correct selection of the target TF and the list of non-target TFs user should test the similarity of the motif of the target TF (see files [dapseq0.motif](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.motif) respecting to the PWM of the example target TF [dapseq0.pwm](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.pwm). The significane of similarity of the motif of the target TF ([dapseq0.motif](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.motif), [dapseq0.motif](https://github.com/parthian-sterlet/gsga/blob/main/examples/improve/dapseq0.motif) and  [dapseq0.motif](https://github.com/parthian-sterlet/gsga/blob/main/examples/destroy/dapseq0.motif in the three speps) should be estimated by the  stadard motif comparison tool [TomTom](https://meme-suite.org/meme/tools/tomtom) (the option Select a motif database or provide motifs to compare with = 'ARABIDOPSIS (Arabidopsis thaliana) DNA. DAP motifs (O'Malley2016)'), e.g. of DAP-seq motifs with notations of TF names see in [XLSX file](https://github.com/parthian-sterlet/gsga/blob/main/matrices/DAP-seq_Plant_Cistrome_528_motifs_for_GSGA.xlsx)
+Examples provides in this repository show the EIN3 motif from the DAP-seq collection as the motif of the target TFs. To perform the correct selection of the target TF and the list of non-target TFs user should test the similarity of the motif of the target TF (see files [dapseq0.motif](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.motif) respecting to the PWM of the example target TF [dapseq0.pwm](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.pwm). The significane of similarity of the motif of the target TF ([dapseq0.motif](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.motif), [dapseq0.motif](https://github.com/parthian-sterlet/gsga/blob/main/examples/improve/dapseq0.motif) and  [dapseq0.motif](https://github.com/parthian-sterlet/gsga/blob/main/examples/destroy/dapseq0.motif in the three speps) should be estimated by the  stadard motif comparison tool [TomTom](https://meme-suite.org/meme/tools/tomtom) (the option Select a motif database or provide motifs to compare with = 'ARABIDOPSIS (Arabidopsis thaliana) DNA. DAP motifs (O'Malley2016)'). If user found highly simialar DAP motifs, the list of motifs of presumed non-target TFs should be corrected. [XLSX file](https://github.com/parthian-sterlet/gsga/blob/main/matrices/DAP-seq_Plant_Cistrome_528_motifs_for_GSGA.xlsx) shows the list of all motifs used in both c++ files, [Order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp)  and [Improve and Destroy](https://github.com/parthian-sterlet/gsga/blob/master/src/genosensor_seq_ga.cpp). In any of these c++ file see the line starting with *int m_ignore[] = * (but not '// int m_ignore[] = ', this is just a [comment in c++ language](https://learn.microsoft.com/en-us/cpp/cpp/comments-cpp?view=msvc-170)).
+The default content of this line is 'int m_ignore[] = { 2, 102, 183, 184, 186, 207, 212, 213, 217, 227, 286, 299, 300, 303, 439, -1 };// no anchor 2024'
+
 # Examples command lines:
 
 These command lines implement various steps for Linux OS:
