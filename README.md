@@ -133,7 +133,7 @@ The default content of this line in both files [Order](https://github.com/parthi
 
 ```int m_ignore[] = { 2, 102, 183, 184, 186, 207, 212, 213, 217, 227, 286, 299, 300, 303, 439, -1 };// no anchor 2024 ```
 
-Such line respects the default option in ignoring motifs, the program ignores only too short and degenerate DAP motifs, this is explained in the MCOT paper ([Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800)). The numbers notation of all motifs showing the high sinilarity to the tested motif of the target TF should be added to the list of this line. Note that the standard statistical criterion p-value < 0.05 is too mild, the Bonferroni correction is p-adjusted < 0.05 / 528 < 0.0001, at least this threshold may be applied to find the significantly similar motifs. 
+The content of this line respects the default option in ignoring motifs, the program ignores only too short and degenerate DAP motifs, this is explained in the MCOT paper ([Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800)). The numbers notation of all motifs showing the high sinilarity to the tested motif of the target TF should be added to the list of this line. Note that the standard statistical criterion p-value < 0.05 is too mild, the Bonferroni correction is p-adjusted < 0.05 / 528 < 0.0001, at least this threshold may be applied to find the significantly similar motifs. 
 
 # Examples command lines:
 
