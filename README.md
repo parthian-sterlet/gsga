@@ -78,8 +78,9 @@ separate compilation of all source files in VC++
 
 # Command line arguments
 
-## 1. Selection of a subset of total native units and definition of their order in a polymer, First step
+## 1. First step: Selection of a subset of total native units and definition of their order in a polymer
 [Order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp) propgram defines the composition of units and their order. 
+
 1. path to files of (a) weight matrix for the target TF DNA motif, [see example matrix](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.pwm) and (b) its threshold list, this file contains the list of pairs {Threshold, -Log<sub>10</sub>(ERR)} values, see [example distribution](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.dist). The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
 2. path to files of (a) all non-target TFs DNA motifs and (b) their threshold lists, these files contain the lists of pairs {Threshold, -Log<sub>10</sub>(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
 3. input file in FASTA format of total amount of monomer units that can be used to generate momomer.
@@ -89,10 +90,11 @@ separate compilation of all source files in VC++
 7. output file listing results, i.e. the multiple solutions in the FASTA format in the descending order of the qulity.
 8. output log file showing the progress in calculation.
 
-## 2. Improve a polymer of native units by single nucleotide mutations within the non-core regions of polymer AND Destroy a polymer of synthetic units by single nucleotide mutations withiin the core regions, Second and Third steps
+## 2. Second & Third steps: Improve a polymer of native units by single nucleotide mutations within the non-core regions of polymer & Destroy a polymer of native or synthetic units by single nucleotide mutations withiin the core regions
 [Improve and Destroy](https://github.com/parthian-sterlet/gsga/blob/master/src/genosensor_seq_ga.cpp) program implements two distict tasks by introducing mutations of nucleotides: 
-* mutations are allowed only in the non-core regions of a polymer thereby improving the binding of the target TF and restricting the binding of non-target TFs, or
-* mutations are allowed only in the non-core regions of a polymer thereby restricting the binding of any TFs either the target or non-target. 
+* Second step: SNSs are allowed only in the non-core regions of a polymer thereby improving the binding of the target TF and restricting the binding of non-target TFs, or
+* Third step: SNSs are allowed only in the non-core regions of a polymer thereby restricting the binding of any TFs either the target or non-target. 
+
 1. path to files of (a) weight matrix for the target TF DNA motif, see [example matrix](https://github.com/parthian-sterlet/gsga/blob/main/examples/improve/dapseq0.pwm) and (b) its threshold list, this file contains the list of pairs {Threshold, -Log<sub>10</sub>(ERR)} values, [example distribution](https://github.com/parthian-sterlet/gsga/blob/main/examples/improve/dapseq0.dist). The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
 2. path to files of (a) weight matrices for all non-target TFs and (b) their threshold lists, these files contain the lists of pairs {Threshold, -Log<sub>10</sub>(ERR)} values. The last symbol of path must be '/' and '\' for Linux and Windows OS, respectively.
 3. input file in FASTA format with a DNA sequence of polymer selected by the previous analysis step, the first step, [Order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp)
