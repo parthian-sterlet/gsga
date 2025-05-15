@@ -4,12 +4,12 @@ GSGA is is abbreviated as Genetic Sensor generation by Genetic Algorithm. GSGA i
 # Description
 The GSGA program complex (PC) is designed to select synthetic polymers (tandem arrays) of DNA sequence monomer units. These units are separate TFBSs of lengths from 7-8 to 20-30 base pairs (bp). They are also called cis-regulatory elements or individual binding sites (BS) of the target transcription factor (TF). Target TF implies the TF for which specific DNA binding is expected in the experiment. PC requires a library of DNA motifs ([D'haeseleer, 2006](https://doi.org/10.1038/nbt0406-423)) representing BS models of different TFs from public databases of TFBS motifs. Currently PC is adopted for motifs of *A. thaliana* TFs from [Plant Cistrome](http://neomorph.salk.edu/dap_web/pages/index.php) database, it represents motifs derived by the *in vitro* DAP-seq technology ([O’Malley et al., 2016](https://doi.org/10.1016/j.cell.2016.08.063)). PC can be easily adopted for TFs from other taxa, e.g. mammals (human/mouse) and insects (drosophila), e.g. from [Hocomoco](https://hocomoco13.autosome.org/) ([Vorontsov et al., 2024](https://doi.org/10.1093/nar/gkad1077)) or [JASPAR](https://jaspar.elixir.no/) ([Rauluseviciute et al., 2024](https://doi.org/10.1093/nar/gkad1059)). PC applies the stannard motif model of Position Weight Matrix (PWM) [(Wasserman & Sandelin, 2004)](https://doi.org/10.1038/nrg1315). PC searches for polymers in which the BS quality scores of the target TF are maximized and the BS scores of all non-target TFs are minimized. Default polymer contains TOut = 10 monomer units, each of them has length about 20-25 bp, so that central 5-12 bp in each unit are essential for TF binding (core) and its 5'/3' flanking 7-10 bp allow more variability (non-cores). PC can be used to design the structure of a polymer as an oligonucleotide of length about 200-250 bp.
 
-PC implements the genetic algorithm approach to generate and select polymers. PC applies three consecutive steps, they solve the following issues:
+PC implements the genetic algorithm (GA) approach to generate and select polymers. PC applies three consecutive steps, they solve the following issues:
 * GA1, the first step creates a polymer, i.e. it selects participating monomers and defines their exact order;
 * GA2, the second step improves a polymer by introducing certain single-nucleotide substitutions (SNSs) within non-core regions;
 * GA3, the third step destroys a polymer given as a result of the first or second step by introducing certain SNSs within the core regions.
 
-Generally GAs were developed according to the principles published earlier ([Levitsky et al., 2007](https://doi.org/10.1186/1471-2105-8-481); [Tsukanov et al. 2022](https://doi.org/10.3389/fpls.2022.938545)). To start each step, each GA generates a population of randomly chosen solutions and gradually improves them to obtain the final set of solutions. For the first and second/third steps the solutions are a set of polymers and a set of SNS patterns for the certain input polymer, correpondingly. PC evaluates the solutions using a rank-based weighting scheme for motifs of potential TFBSs, and applies GAs to optimize the population of individuals, i.e. distinct polymers. The PC result, an oligonucleotide is called genetic sensor or biosensor. Subsequent incorporation of this biosensor into a transgene promoter for specific expression under the action of a target TF can be used as a marker of its presence. 
+Generally GAs were developed according to the principles published earlier ([Levitsky et al., 2007](https://doi.org/10.1186/1471-2105-8-481); [Tsukanov et al. 2022](https://doi.org/10.3389/fpls.2022.938545)). To start each step, each GA generates a population of randomly chosen solutions and gradually improves them to obtain the final set of solutions. For the first and second/third steps the solutions are a set of polymers and a set of SNS patterns for the certain input polymer, correpondingly. PC evaluates the solutions using a rank-based weighting scheme for motifs of potential TFBSs, and applies GAs to optimize the population of individuals, i.e. distinct polymers. The main PC output is an oligonucleotide, it is called genetic sensor or biosensor. Subsequent incorporation of this biosensor into a transgene promoter for specific expression under the action of a target TF can be used as a marker of presence of this TF. 
 
 # Requirements
 The source code is written in C++ language. To compile exetubables from the source code it is required:
@@ -32,7 +32,7 @@ To make the recognition for all DNA motifs uniform, each threshold respects the 
 
 # Pipeline description
 
-# Common input data for all steps
+# Common input data for all three steps
 * a set of weight matrices for non-target TFs;
 * a set of preliminarily computed lists of thresholds and respective ERRs for each weight matrix ([Tsukanov et al., 2022](https://doi.org/10.3389/fpls.2022.938545); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800); [Levitsky et al., 2024](https://doi.org/10.18699/vjgb-24-90)).
 
@@ -60,6 +60,7 @@ The third step (GA3) is another application of approach developped for the prece
 * the probability P of SNSs within core elements.
 
 # How to compile
+
 ## In Linux system: 
 
 ```
