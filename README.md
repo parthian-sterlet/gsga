@@ -39,27 +39,27 @@ To make the recognition for all DNA motifs uniform, each threshold respects the 
 * a set of preliminarily computed lists of thresholds and respective ERRs for each weight matrix ([Tsukanov et al., 2022](https://doi.org/10.3389/fpls.2022.938545); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800); [Levitsky et al., 2024](https://doi.org/10.18699/vjgb-24-90)).
 
 ## First step, GA1
-To generate a new polymer, the default number of TOut = 10 monomers are required in a polymer. The total number of distinct input monomer units TIn should be higher, TOut >= TIn = 10, to support the polymer specificity. These TIn monomers are presumed to be the native DNA sequences supported by ChIP-seq/RNA-seq etc. experimental edidence of specific binding of the target TF. The task of the first step is dual: 
-1. to select exact output TOut monomers among the total TIn provided in input data; 
-2. to denote the exact order of these TOut selected monomers.
+To generate a new polymer, the default number of T<sub>OUT</sub> = 10 monomers are required in a polymer. The total number of distinct input monomer units T<sub>IN</sub> should be higher, T<sub>IN</sub> >= T<sub>OUT</sub> = 10, to support the polymer specificity. These T<sub>IN</sub> monomers are presumed to be the native DNA sequences supported by ChIP-seq/RNA-seq etc. experimental edidence of specific binding of the target TF. The task of the first step is dual: 
+1. to select exact outputT<sub>OUT</sub> monomers among the total T<sub>IN</sub> provided in input data; 
+2. to denote the exact order of these T<sub>OUT</sub> selected monomers.
 
-For example, if we have 20 input monomers {T1, T2, ... T20}, then the example version of the ouput order of the selected top-scored ten monomers is {T17, T2, T5, T13, T4, T1, T18, T9, T15, T11}. To find an optimal combination, GA of the first step (GA1) selects the multiple versions of polymers with the least susceptibility to the non-target TFs binding. As input data, GA1 requires:
-* a set of TIn monomer units containing individual binding sites of the target TF; 
-* the number of TOut monomer units of a polymer; 
+For example, if we have 20 input monomers {M1, M2, ... M20}, then the example version of the ouput order of the selected top-scored ten monomers is {M17, M2, M5, M13, M4, M1, M18, M9, M15, M11}. To find an optimal combination, GA of the first step (GA1) selects the multiple versions of polymers with the least susceptibility to the non-target TFs binding. As input data, GA1 requires:
+* a set of T<sub>IN</sub> monomer units containing individual binding sites of the target TF; 
+* the number of T<sub>OUT</sub> monomer units of a polymer; 
 * a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix.
 
 ## Second step, GA2
 The second step (GA2) selects appropriate SNS outside the essential positions the target TF binding in each monomer. Hence, GA2 requires: 
 * a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores); 
 * a matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix; 
-* a list of positions in the polymer (the assembled sequence from the first step) designating spacers between the essential cores and non-core elements, and flanking regions before/after the first/last monomer units of the polymer; 
-* the probability P of SNSs within non-core elements. 
+* a list of positions in the polymer (the assembled sequence from the first step) designating non-core elements, and flanking regions before/after the first/last monomer units of the polymer; 
+* the probability of SNSs within non-core elements. 
 
 ## Third step, GA3
 The third step (GA3) is another application of approach developped for the preceeding second step (GA2). Here the same source code is applied to destroy any DNA binding motif, hence it is not important here BSs of which TF to exclude. Hence, BSs of neither target nor non-target TFs are now undesirable. Hence, GA3 requires:
 * a polymer assembled from the units comprising the target TF binding site (the essential cores) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores), this polymer may be the result of either the first or second step;
-* a list of positions in the polymer designating the essential cores between the non-core regions and flanking regions before/after the first/last essential cores of the polymer;
-* the probability P of SNSs within core elements.
+* a list of positions in the polymer designating the essential cores regions;
+* the probability of SNSs within core elements.
 
 # How to compile
 
@@ -106,7 +106,7 @@ separate compilation of all source files in VC++
 6. char* value, name of motif file, the default value "dapseq" means (a) for the non-target TFs: the weight matrix files are dapseq1.pwm, dapseq2.pwm, etc. up to dapseq528.pwm, and threshold list files are dapseq1.dist, dapseq2.dist, etc. up to dapseq528.dist, (b) for the target TF the weight matrix file is dapseq0.pwm and the threshold list file is dapseq0.dist.
 7. output file, log file listing results, i.e. the multiple solutions in the descending order of the qulity.
 8. integer value, the anchor mode. The values 1 or 0 mean the Improve/Destroy option respecting the Second/Third steps of analysis. In these cases a specific weight matrix of a target TF is opposed / is not opposed to matrices of all non-target TFs.
-9. double value, the probability P of nucleotide substitutions (SNS) within designated elements, P value is equal to the ratio between the number of mutation and sequence length, the number of substitutions is the same for each non-core/core spacer between two neighbor core/non-core regions for Improve/Desrtoy options.
+9. double value, the probability P of SNSs within designated elements, P value is equal to the ratio between the number of SNSs and the total sequence length allowed for these SNSs, the number of SNSs is the same for each non-core/core region between two neighbor core/non-core regions for Improve/Desrtoy steps.
 10. output log file showing the progress in calculation.
 
 ## Supplementary programs
