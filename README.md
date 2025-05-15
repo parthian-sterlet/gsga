@@ -106,21 +106,26 @@ These programs are described in [MCOT repository](https://github.com/parthian-st
 * Computation of the threshold list consisting of pairs of values {Threshold, -Log10(ERR)} for the DNA motif defined by PFM and PWM, [pwm_iz_pwm_thr_dist0.cpp](https://github.com/parthian-sterlet/mcot-kernel/blob/master/src/pwm_thr_err/pwm_iz_pwm_thr_dist0.cpp). This program computes the recognition thresholds as the list of pairs of values {Threshold, -Log10(ERR)} (see [example distribution](https://github.com/parthian-sterlet/gsga/blob/main/examples/improve/dapseq0.dist)) for a given weight matrix, see [example weight matrix](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.pwm)
 
 # Selction of matrices of the target and non-target TFs
-Examples provides in this repository show the EIN3 motif from the DAP-seq collection as the motif of the target TFs. To perform the correct selection of the target TF and the list of non-target TFs user should test the similarity of the motif of the target TF (see files [dapseq0.motif](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.motif) respecting to the PWM of the example target TF [dapseq0.pwm](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.pwm). The significane of similarity of the motif of the target TF ([dapseq0.motif](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.motif), [dapseq0.motif](https://github.com/parthian-sterlet/gsga/blob/main/examples/improve/dapseq0.motif) and  [dapseq0.motif](https://github.com/parthian-sterlet/gsga/blob/main/examples/destroy/dapseq0.motif in the three speps) should be estimated by the  stadard motif comparison tool [TomTom](https://meme-suite.org/meme/tools/tomtom) (the option Select a motif database or provide motifs to compare with = 'ARABIDOPSIS (Arabidopsis thaliana) DNA. DAP motifs (O'Malley2016)'). If user found highly simialar DAP motifs, the list of motifs of presumed non-target TFs should be corrected. [XLSX file](https://github.com/parthian-sterlet/gsga/blob/main/matrices/DAP-seq_Plant_Cistrome_528_motifs_for_GSGA.xlsx) shows the list of all motifs used in both c++ files, [Order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp)  and [Improve and Destroy](https://github.com/parthian-sterlet/gsga/blob/master/src/genosensor_seq_ga.cpp). In any of these c++ file see the line starting with 
+The presence among motives of non-target factors of motives very similar to the selected motive of the target factor very negatively affects the quality of results of programs of all three steps. The examples provided in this repository show the G-rich non-canonical motif of the EIN3 TF as the motif of the target TFs (see file [dapseq0.motif](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.motif) respecting to the PWM of the example target TF [dapseq0.pwm](https://github.com/parthian-sterlet/gsga/blob/main/examples/order/dapseq0.pwm). This motif does not show the high similrity to any motif from the DAP-seq library of motifs accepted here in analysis. To perform the correct selection of any arbitrary target TF and the provided here list of non-target TFs from DAP-seq user should test the similarity of tested motif of the target TF. The significane of similarity of the motif of the target TF should be estimated by the  stadard motif comparison tool [TomTom](https://meme-suite.org/meme/tools/tomtom) (the option Select a motif database or provide motifs to compare with = 'ARABIDOPSIS (Arabidopsis thaliana) DNA. DAP motifs (O'Malley2016)'). If user found highly simialar DAP motifs, the list of motifs of presumed non-target TFs should be corrected. [XLSX file](https://github.com/parthian-sterlet/gsga/blob/main/matrices/DAP-seq_Plant_Cistrome_528_motifs_for_GSGA.xlsx) shows the list of all motifs used in both c++ files, [Order](https://github.com/parthian-sterlet/gsga/blob/main/src/genosensor_seq_order_ga.cpp)  and [Improve and Destroy](https://github.com/parthian-sterlet/gsga/blob/master/src/genosensor_seq_ga.cpp). In any of these c++ file see the piece just after the declaration of main function
+
+``` int main(int argc, char *argv[]) ``` 
+
+Next, after parsing the command line arguments there is a line to select ignored motifs of non-target TFs, this line starts with 
 
 ```int m_ignore[] = ```
 
 but not 
 
-``` int m_ignore[] = ```
+``` // int m_ignore[] = ```
 
-this is just a [comment in c++ language](https://learn.microsoft.com/en-us/cpp/cpp/comments-cpp?view=msvc-170)).
+since the first symbols in a line '//' mark a [comment in c++ language](https://learn.microsoft.com/en-us/cpp/cpp/comments-cpp?view=msvc-170)).
 
 The default content of this line is 
 
 ```int m_ignore[] = { 2, 102, 183, 184, 186, 207, 212, 213, 217, 227, 286, 299, 300, 303, 439, -1 };// no anchor 2024 ```
 
-It respects ignoring too short and degenerate motifs explained in the MCOT paper ([Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800))
+It respects the default option in ignoring motifs, the program ignores only too short and degenerate DAP motifs, this is explained in the MCOT paper ([Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800)). The numbers of all motifs showing the high sinilarity to the tested motif of the target TF should be added to the list of this line. Note that the stadard criterion p-value < 0.05 is too mild, the Bonferroni correction is p-adjusted < 0.05 / 528 < 0.0001, at least this threshold may be applied to find the similar motifs. 
+
 
 # Examples command lines:
 
