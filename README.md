@@ -18,11 +18,11 @@ The source code is written in C++ language. To compile exetubables from the sour
 * In Windows system any VC++ package, e.g. [Microsoft Visual Studio Community](https://visualstudio.microsoft.com/vs/community/)
 
 # Repository structure
-Folder [**src**](https://github.com/parthian-sterlet/gsga/tree/main/src) contains two major C++ source code files, and two supplementary C++ source code files are provided in [MCOT repository]{https://github.com/parthian-sterlet/mcot-kernel).  
+Folder [**src**](https://github.com/parthian-sterlet/gsga/tree/main/src) contains two major C++ source code files, and two supplementary C++ source code files are provided in [MCOT repository](https://github.com/parthian-sterlet/mcot-kernel).  
 
-Folder [**run**](https://github.com/parthian-sterlet/gsga/tree/main/run) contains the main [script](https://github.com/parthian-sterlet/gsga/blob/main/run/build.sh) for source code compliation, the three main scripts and the corresponding three command line examples, implementing different steps of the polymer search.
+Folder [**run**](https://github.com/parthian-sterlet/gsga/tree/main/run) contains the script [script](https://github.com/parthian-sterlet/gsga/blob/main/run/build.sh) for source code compliation, and three scripts implementing three command line examples, corresponding three steps.
 
-Folder [**examples**](https://github.com/parthian-sterlet/gsga/tree/main/examples) contains the functional examples of the three main steps of the polymer search.
+Folder [**examples**](https://github.com/parthian-sterlet/gsga/tree/main/examples) contains input files as examples of the three main steps.
 
 Folder [**library**](https://github.com/parthian-sterlet/gsga/tree/main/library) represents the library of PWMs, it contains two types of files: 
 * files of PWMs as matrices of position-specific log-odds weights computed as desribed previously ([Levitsky et al., 2007](https://doi.org/10.1186/1471-2105-8-481); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800)), and
