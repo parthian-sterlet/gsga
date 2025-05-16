@@ -36,11 +36,11 @@ To make the recognition for all DNA motifs uniform, each threshold respects the 
 
 # Common input data for all three steps
 * a set of weight matrices for non-target TFs;
-* a set of preliminarily computed lists of thresholds and respective ERRs for each weight matrix ([Tsukanov et al., 2022](https://doi.org/10.3389/fpls.2022.938545); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800); [Levitsky et al., 2024](https://doi.org/10.18699/vjgb-24-90)).
+* a set of lists of recognition thresholds and respective ERR values for weight matrices ([Tsukanov et al., 2022](https://doi.org/10.3389/fpls.2022.938545); Levitsky et al., [2019](https://doi.org/10.1093/nar/gkz800), [2024](https://doi.org/10.18699/vjgb-24-90)).
 
 ## First step, GA<sub>1</sub>
 To generate a new polymer, the default number of T<sub>OUT</sub> = 10 monomers are required in a polymer. The total number of distinct input monomer units T<sub>IN</sub> should be higher, T<sub>IN</sub> >= T<sub>OUT</sub> = 10, to support the polymer specificity. These T<sub>IN</sub> monomers are presumed to be the native DNA sequences supported by ChIP-seq/RNA-seq etc. experimental edidence of specific binding of the target TF. The task of the first step is dual: 
-1. to select exact outputT<sub>OUT</sub> monomers among the total T<sub>IN</sub> provided in input data; 
+1. to select exact output T<sub>OUT</sub> monomers among the total T<sub>IN</sub> provided in input data; 
 2. to denote the exact order of these T<sub>OUT</sub> selected monomers.
 
 For example, if we have 20 input monomers {M<sub>1</sub>, M<sub>2</sub>, ... M<sub>20</sub>}, then the example version of the ouput order of the selected top-scored ten monomers is {M<sub>17</sub>, M<sub>2</sub>, M<sub>5</sub>, M<sub>13</sub>, M<sub>4</sub>, M<sub>1</sub>, M<sub>18</sub>, M<sub>9</sub>, M<sub>15</sub>, M<sub>11</sub>}. To find an optimal combination, GA of the first step (GA<sub>1</sub>) selects the multiple versions of polymers with the least susceptibility to the non-target TFs binding. As input data, GA<sub>1</sub> requires:
