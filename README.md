@@ -26,7 +26,7 @@ Folder [**run**](https://github.com/parthian-sterlet/gsga/tree/main/run) contain
 
 Folder [**examples**](https://github.com/parthian-sterlet/gsga/tree/main/examples) contains input files as examples of the three main steps.
 
-Folder [**library**](https://github.com/parthian-sterlet/gsga/tree/main/library) represents the collection of PWMs, it contains two types of files: 
+Folder [**matrices**](https://github.com/parthian-sterlet/gsga/tree/main/matrices) represents the collection of PWMs, it contains two types of files: 
 * files of PWMs as matrices of position-specific log-odds weights computed as desribed previously ([Levitsky et al., 2007](https://doi.org/10.1186/1471-2105-8-481); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800)), and
 * files of lists of recognition thresholds computed with the whole-genome set of promoters of protein coding genes, see Levitsky et al. ([2019](https://doi.org/10.1093/nar/gkz800)) and Tsukanov et al. ([2022](https://doi.org/10.3389/fpls.2022.938545)).
 
