@@ -27,10 +27,10 @@ Folder [**run**](https://github.com/parthian-sterlet/gsga/tree/main/run) contain
 Folder [**examples**](https://github.com/parthian-sterlet/gsga/tree/main/examples) contains input files as examples of the three main steps.
 
 Folder [**matrices**](https://github.com/parthian-sterlet/gsga/tree/main/matrices) represents the collection of PWMs, it contains two types of files: 
-* files of PWMs as matrices of position-specific log-odds weights computed as desribed previously ([Levitsky et al., 2007](https://doi.org/10.1186/1471-2105-8-481); [Levitsky et al., 2019](https://doi.org/10.1093/nar/gkz800)), and
+* files of PWMs as matrices of position-specific log-odds weights computed as desribed previously (Levitsky et al., [2007](https://doi.org/10.1186/1471-2105-8-481), [2019](https://doi.org/10.1093/nar/gkz800)), and
 * files of lists of recognition thresholds computed with the whole-genome set of promoters of protein coding genes, see Levitsky et al. ([2019](https://doi.org/10.1093/nar/gkz800)) and Tsukanov et al. ([2022](https://doi.org/10.3389/fpls.2022.938545)).
 
-To make the recognition for all DNA motifs uniform, each threshold respects the expected recognition rate (ERR) value, this value means the probability of site recognition per one tested bp position in all promoters ([Levitsky et al., 2024](https://doi.org/10.18699/vjgb-24-90)); hence, each file of the list contains two columns: (a) recognition threshold and (b) ERR value as Log<sub>10</sub>(probability), where the probability is ratio of the positions with recognized BSs (in either DNA strand) to the total number of tested positions in promoters.
+To make the recognition for all DNA motifs uniform, each threshold respects the expected recognition rate (ERR) value, this value means the probability of site recognition per one tested bp position in all promoters ([Levitsky et al., 2024](https://doi.org/10.18699/vjgb-24-90)); hence, each file of the list contains two columns: (a) recognition threshold and (b) ERR value as Log<sub>10</sub>(probability), where the probability is ratio of the number of positions with recognized BSs to the total number of tested positions in promoters.
 
 # Pipeline description
 
