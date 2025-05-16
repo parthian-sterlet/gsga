@@ -44,21 +44,21 @@ To generate a new polymer, the default number of T<sub>OUT</sub> = 10 monomers a
 2. to denote the exact order of these T<sub>OUT</sub> selected monomers.
 
 For example, if we have 20 input monomers {M<sub>1</sub>, M<sub>2</sub>, ... M<sub>20</sub>}, then the example version of the ouput order of the selected top-scored ten monomers is {M<sub>17</sub>, M<sub>2</sub>, M<sub>5</sub>, M<sub>13</sub>, M<sub>4</sub>, M<sub>1</sub>, M<sub>18</sub>, M<sub>9</sub>, M<sub>15</sub>, M<sub>11</sub>}. To find an optimal combination, GA of the first step (GA<sub>1</sub>) selects the multiple versions of polymers with the least susceptibility to the non-target TFs binding. As input data, GA<sub>1</sub> requires:
-* a set of T<sub>IN</sub> monomer units containing individual binding sites of the target TF; 
+* the set of T<sub>IN</sub> monomer units containing individual binding sites of the target TF; 
 * the number of T<sub>OUT</sub> monomer units of a polymer; 
-* a weight matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix.
+* the weight matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix.
 
 ## Second step, GA<sub>2</sub>
 The second step (GA<sub>2</sub>) selects appropriate SNS outside the essential positions the target TF binding in each monomer. Hence, GA<sub>2</sub> requires: 
-* a polymer assembled from the units comprising the target TF binding site (the essential core) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores); 
-* a weight matrix for the target TF, and a list of its recognition thresholds and respective ERRs for this matrix; 
-* a list of positions in the polymer (the assembled sequence from the first step) designating non-core elements, and flanking regions before/after the first/last monomer units of the polymer; 
+* the polymer assembled from the units comprising the target TF binding site, each site contains the essential core flanked by several nucleotides on 5' and 3' sides (non-cores); 
+* the weight matrix for the target TF, and the list of its recognition thresholds and respective ERR values; 
+* the list of positions in the polymer designating non-core elements, and flanking regions before/after the first/last monomer units of the polymer; 
 * the probability of SNSs within non-core elements. 
 
 ## Third step, GA<sub>3</sub>
 The third step (GA<sub>3</sub>) is another application of approach developped for the preceeding second step (GA<sub>2</sub>). Here the same source code is applied to destroy any DNA binding motif, hence it is not important here BSs of which TF to exclude. Hence, BSs of neither target nor non-target TFs are now undesirable. Hence, GA<sub>3</sub> requires:
-* a polymer assembled from the units comprising the target TF binding site (the essential cores) flanked by several nucleotides on 5' and 3' sides (less essential flanks, non-cores), this polymer may be the result of either the first or second step;
-* a list of positions in the polymer designating the essential cores regions;
+* the polymer assembled from the units comprising the target TF binding site, each site contains the essential core flanked by several nucleotides on 5' and 3' sides (non-cores), this polymer may be the result of either the first or second step;
+* the list of positions in the polymer designating the cores regions;
 * the probability of SNSs within core elements.
 
 # How to compile
